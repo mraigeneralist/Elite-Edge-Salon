@@ -11,7 +11,6 @@ const galleryItems = [
   { label: "Soft Curls", src: "/Images/Image-2.jpg", aspect: "aspect-[3/4]" },
   { label: "Layered Volume", src: "/Images/Image-6.jpg", aspect: "aspect-[3/4]" },
   { label: "Color Melt", src: "/Images/Image-7.jpg", aspect: "aspect-[3/4]" },
-  { label: "Textured Style", src: "/Images/Image-8.jpg", aspect: "aspect-square" },
 ];
 
 export default function GallerySection() {

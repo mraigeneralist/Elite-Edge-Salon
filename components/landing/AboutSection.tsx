@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 const features = [
@@ -55,29 +54,8 @@ export default function AboutSection() {
     <section id="about" className="relative py-24 sm:py-32 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Feature cards + image */}
+          {/* Left - Feature cards */}
           <div className="space-y-6">
-            {/* Showcase image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7 }}
-              className="relative h-64 rounded-2xl overflow-hidden border border-border mb-2"
-            >
-              <Image
-                src="/Images/Image-2.jpg"
-                alt="Elegant hair styling at Elite Edge"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-              <div className="absolute bottom-4 left-4">
-                <p className="text-xs tracking-[0.2em] uppercase text-primary font-medium">Our Signature Look</p>
-              </div>
-            </motion.div>
-
             <div className="grid grid-cols-2 gap-4">
               {features.map((feature, i) => (
                 <motion.div
@@ -138,40 +116,6 @@ export default function AboutSection() {
                 </li>
               ))}
             </ul>
-
-            {/* Small image pair */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="relative h-36 rounded-xl overflow-hidden border border-border"
-              >
-                <Image
-                  src="/Images/Image-6.jpg"
-                  alt="Layered volume styling"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="relative h-36 rounded-xl overflow-hidden border border-border"
-              >
-                <Image
-                  src="/Images/Image-7.jpg"
-                  alt="Color melt hair styling"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-              </motion.div>
-            </div>
           </motion.div>
         </div>
       </div>
