@@ -49,8 +49,8 @@ export default function DateStep({
             fromDate={today}
             toDate={addDays(today, 60)}
             classNames={{
-              today: "font-bold text-primary",
-              selected: "bg-primary text-background rounded-full",
+              today: "font-bold text-primary [&.rdp-selected]:text-background",
+              selected: "!bg-primary !text-background rounded-full",
               disabled: "text-muted-foreground/40 line-through",
               chevron: "fill-primary",
             }}
