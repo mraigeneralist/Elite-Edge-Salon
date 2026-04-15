@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
@@ -124,7 +125,7 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right visual */}
+          {/* Right visual — Image collage */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -132,35 +133,56 @@ export default function HeroSection() {
             className="hidden lg:flex justify-center"
           >
             <div className="relative">
-              {/* Main circle */}
-              <div className="w-[380px] h-[380px] bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-full flex items-center justify-center border border-primary/10">
-                <div className="w-[300px] h-[300px] bg-surface/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-border">
-                  <div className="text-center space-y-4">
-                    <svg
-                      className="w-16 h-16 mx-auto text-primary opacity-80"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m7.848 8.25 1.536.887M7.848 8.25a3 3 0 1 1-5.196-3 3 3 0 0 1 5.196 3Zm1.536.887a2.165 2.165 0 0 1 1.083 1.839c.005.351.054.695.14 1.024M9.384 9.137l2.077 1.199M7.848 15.75l1.536-.887m-1.536.887a3 3 0 1 1-5.196 3 3 3 0 0 1 5.196-3Zm1.536-.887a2.165 2.165 0 0 0 1.083-1.838c.005-.352.054-.695.14-1.025m-1.223 2.863 2.077-1.199m0-3.328a4.323 4.323 0 0 1 2.068-1.379l5.325-1.628a4.5 4.5 0 0 1 2.48-.044l.803.215-7.794 4.5m-2.882-1.664A4.33 4.33 0 0 0 10.607 12m3.736 0 7.794 4.5-.803.215a4.5 4.5 0 0 1-2.48-.043l-5.326-1.629a4.324 4.324 0 0 1-2.068-1.379M14.343 12l-2.882 1.664"
-                      />
-                    </svg>
-                    <p className="font-display text-xl text-foreground tracking-wide">Premium Beauty</p>
-                    <p className="text-xs text-muted-foreground tracking-[0.15em] uppercase">Starts Here</p>
-                  </div>
-                </div>
+              {/* Main hero image */}
+              <div className="w-[340px] h-[440px] rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl shadow-primary/10">
+                <Image
+                  src="/Images/Image-4.jpg"
+                  alt="Bridal hair styling"
+                  fill
+                  className="object-cover"
+                  sizes="340px"
+                  priority
+                />
               </div>
 
-              {/* Floating card bottom-left */}
+              {/* Smaller image top-right */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="absolute -top-6 -right-16 w-[150px] h-[180px] rounded-xl overflow-hidden border border-border shadow-xl"
+              >
+                <Image
+                  src="/Images/Image-5.jpg"
+                  alt="Auburn bob styling"
+                  fill
+                  className="object-cover"
+                  sizes="150px"
+                />
+              </motion.div>
+
+              {/* Smaller image bottom-left */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="absolute -bottom-4 -left-16 bg-surface rounded-xl p-4 flex items-center gap-3 border border-border gold-glow"
+                transition={{ duration: 0.6, delay: 1 }}
+                className="absolute -bottom-6 -left-16 w-[160px] h-[190px] rounded-xl overflow-hidden border border-border shadow-xl"
+              >
+                <Image
+                  src="/Images/Image-1.jpg"
+                  alt="Ombre waves styling"
+                  fill
+                  className="object-cover"
+                  sizes="160px"
+                />
+              </motion.div>
+
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="absolute -bottom-2 right-4 bg-surface rounded-xl px-4 py-3 flex items-center gap-3 border border-border gold-glow"
               >
                 <div className="w-10 h-10 bg-success/10 rounded-full flex items-center justify-center">
                   <svg className="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -170,24 +192,6 @@ export default function HeroSection() {
                 <div>
                   <p className="text-sm font-semibold text-foreground">Easy Booking</p>
                   <p className="text-xs text-muted-foreground">Confirm via WhatsApp</p>
-                </div>
-              </motion.div>
-
-              {/* Floating card top-right */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                className="absolute -top-4 -right-12 bg-surface rounded-xl p-4 flex items-center gap-3 border border-border gold-glow"
-              >
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Open 6 Days</p>
-                  <p className="text-xs text-muted-foreground">Tue - Sun</p>
                 </div>
               </motion.div>
             </div>

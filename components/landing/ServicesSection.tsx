@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const services = [
@@ -13,6 +14,7 @@ const services = [
     description:
       "Precision cuts, blowouts, and styling by expert stylists who understand your unique texture and face shape.",
     duration: "45-90 min",
+    image: "/Images/Image-3.jpg",
   },
   {
     icon: (
@@ -24,6 +26,7 @@ const services = [
     description:
       "From subtle balayage to bold transformations, our color specialists create stunning, lasting results.",
     duration: "90-180 min",
+    image: "/Images/Image-1.jpg",
   },
   {
     icon: (
@@ -35,6 +38,7 @@ const services = [
     description:
       "Rejuvenating facials, chemical peels, and microdermabrasion for radiant, youthful skin.",
     duration: "60-90 min",
+    image: null,
   },
   {
     icon: (
@@ -46,6 +50,7 @@ const services = [
     description:
       "Luxurious manicures, pedicures, and intricate nail art that express your personal style.",
     duration: "30-60 min",
+    image: null,
   },
   {
     icon: (
@@ -57,6 +62,7 @@ const services = [
     description:
       "Flawless bridal, party, and editorial makeup by certified artists using premium products.",
     duration: "45-90 min",
+    image: "/Images/Image-4.jpg",
   },
   {
     icon: (
@@ -68,6 +74,7 @@ const services = [
     description:
       "Body wraps, waxing, and relaxing spa treatments for total rejuvenation and self-care.",
     duration: "30-120 min",
+    image: null,
   },
 ];
 
@@ -105,20 +112,36 @@ export default function ServicesSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -4, scale: 1.02 }}
-              className="group bg-surface border border-border rounded-2xl p-7 hover:border-primary/30 transition-all duration-500"
+              className="group bg-surface border border-border rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500"
             >
-              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-5 transition-colors group-hover:bg-primary/20">
-                {service.icon}
+              {/* Service image */}
+              {service.image && (
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+                </div>
+              )}
+
+              <div className={`p-7 ${service.image ? "pt-4" : ""}`}>
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-5 transition-colors group-hover:bg-primary/20">
+                  {service.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {service.name}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+                  {service.description}
+                </p>
+                <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-primary border border-primary/20 px-3 py-1.5 rounded-full">
+                  {service.duration}
+                </span>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {service.name}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                {service.description}
-              </p>
-              <span className="text-[10px] font-medium tracking-[0.15em] uppercase text-primary border border-primary/20 px-3 py-1.5 rounded-full">
-                {service.duration}
-              </span>
             </motion.div>
           ))}
         </div>

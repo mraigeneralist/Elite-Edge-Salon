@@ -1,16 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const galleryItems = [
-  { label: "Balayage", gradient: "from-primary/30 via-primary-dark/20 to-background", aspect: "aspect-[3/4]" },
-  { label: "Bridal Glam", gradient: "from-primary/20 via-background to-primary/10", aspect: "aspect-square" },
-  { label: "Nail Art", gradient: "from-primary-dark/30 via-primary/15 to-background", aspect: "aspect-square" },
-  { label: "Facial Glow", gradient: "from-background via-primary/20 to-primary-dark/20", aspect: "aspect-[3/4]" },
-  { label: "Color Work", gradient: "from-primary/25 via-background to-primary/15", aspect: "aspect-[3/4]" },
-  { label: "Styling", gradient: "from-primary-dark/20 via-primary/20 to-background", aspect: "aspect-square" },
-  { label: "Spa Day", gradient: "from-background via-primary/15 to-primary-dark/25", aspect: "aspect-square" },
-  { label: "Makeup Art", gradient: "from-primary/20 via-primary-dark/15 to-background", aspect: "aspect-[3/4]" },
+  { label: "Ombre Waves", src: "/Images/Image-1.jpg", aspect: "aspect-[3/4]" },
+  { label: "Bridal Curls", src: "/Images/Image-4.jpg", aspect: "aspect-[3/4]" },
+  { label: "Sleek Blowout", src: "/Images/Image-3.jpg", aspect: "aspect-square" },
+  { label: "Auburn Bob", src: "/Images/Image-5.jpg", aspect: "aspect-square" },
+  { label: "Soft Curls", src: "/Images/Image-2.jpg", aspect: "aspect-[3/4]" },
+  { label: "Layered Volume", src: "/Images/Image-6.jpg", aspect: "aspect-[3/4]" },
+  { label: "Color Melt", src: "/Images/Image-7.jpg", aspect: "aspect-[3/4]" },
+  { label: "Textured Style", src: "/Images/Image-8.jpg", aspect: "aspect-square" },
 ];
 
 export default function GallerySection() {
@@ -46,18 +47,29 @@ export default function GallerySection() {
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ scale: 1.03 }}
-              className={`relative ${item.aspect} bg-gradient-to-br ${item.gradient} rounded-2xl overflow-hidden border border-border group cursor-pointer break-inside-avoid`}
+              className={`relative ${item.aspect} rounded-2xl overflow-hidden border border-border group cursor-pointer break-inside-avoid`}
             >
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+              <Image
+                src={item.src}
+                alt={item.label}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
+
+              {/* Dark overlay on hover */}
+              <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                 <span className="text-sm font-display text-foreground tracking-[0.2em] uppercase">
                   {item.label}
                 </span>
               </div>
 
-              {/* Subtle label */}
+              {/* Subtle bottom gradient always visible */}
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-0 transition-opacity duration-300" />
+
+              {/* Label */}
               <div className="absolute bottom-3 left-3 group-hover:opacity-0 transition-opacity duration-300">
-                <span className="text-[10px] tracking-[0.15em] uppercase text-primary/60">
+                <span className="text-[10px] tracking-[0.15em] uppercase text-white/80 drop-shadow-lg">
                   {item.label}
                 </span>
               </div>
