@@ -195,25 +195,8 @@ export default function BookPage() {
       {/* Header */}
       <div className="bg-surface/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 border border-primary/40 rounded-full flex items-center justify-center">
-              <svg
-                className="w-4 h-4 text-primary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m9.813 15.904 3.09-8.808m-3.09 8.808L3.312 9.488a1.5 1.5 0 0 1 .64-2.028l6.375-3.188a1.5 1.5 0 0 1 1.346 0l6.375 3.188a1.5 1.5 0 0 1 .64 2.028l-6.5 6.416a1.5 1.5 0 0 1-2.376 0Z"
-                />
-              </svg>
-            </div>
-            <span className="text-lg font-display font-semibold tracking-wide">
-              ELITE <span className="text-primary">EDGE</span>
-            </span>
+          <Link href="/" className="text-lg font-display font-semibold tracking-wide">
+            ELITE <span className="text-primary">EDGE</span>
           </Link>
 
           {canGoBack ? (
