@@ -1,0 +1,74 @@
+"use client";
+
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
+import { addDays, isBefore, startOfDay } from "date-fns";
+
+interface Props {
+  selected: Date | null;
+  onSelect: (date: Date | null) => void;
+  onNext: () => void;
+  blockedDates: string[];
+  availableDays: number[];
+}
+
+export default function DateStep({
+  selected,
+  onSelect,
+  onNext,
+  blockedDates,
+  availableDays,
+}: Props) {
+  const today = startOfDay(new Date());
+  const blocked = blockedDates.map((d) => new Date(d + "T00:00:00"));
+
+  const isDisabled = (date: Date) => {
+    if (isBefore(date, today)) return true;
+    if (blocked.some((b) => b.toDateString() === date.toDateString()))
+      return true;
+    if (availableDays.length > 0 && !availableDays.includes(date.getDay()))
+      return true;
+    return false;
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-display font-medium text-foreground mb-2">Pick a Date</h2>
+      <p className="text-muted-foreground text-sm mb-8">
+        Select your preferred appointment date.
+      </p>
+
+      <div className="flex justify-center">
+        <div className="bg-surface border border-border rounded-2xl p-4 sm:p-6">
+          <DayPicker
+            mode="single"
+            selected={selected || undefined}
+            required={false}
+            onSelect={(day) => onSelect(day || null)}
+            disabled={isDisabled}
+            fromDate={today}
+            toDate={addDays(today, 60)}
+            classNames={{
+              today: "font-bold text-primary",
+              selected: "bg-primary text-background rounded-full",
+              disabled: "text-muted-foreground/40 line-through",
+              chevron: "fill-primary",
+            }}
+          />
+        </div>
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={!selected}
+        className={`mt-8 w-full py-3.5 font-semibold text-[12px] tracking-[0.1em] uppercase transition-all ${
+          selected
+            ? "bg-primary text-background hover:bg-primary-dark active:scale-[0.98] shadow-md shadow-primary/20"
+            : "bg-muted text-muted-foreground border border-border cursor-not-allowed"
+        }`}
+      >
+        Next
+      </button>
+    </div>
+  );
+}

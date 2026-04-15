@@ -1,0 +1,97 @@
+import { supabaseServer } from "@/lib/supabase-server";
+import {
+  sendBookingConfirmation,
+  sendStylistNotification,
+} from "@/lib/messaging";
+import { format, parse } from "date-fns";
+
+export async function POST(req: Request) {
+  const body = await req.json();
+  const { appointmentId, otp } = body;
+
+  if (!appointmentId || !otp) {
+    return Response.json(
+      { error: "Appointment ID and OTP are required" },
+      { status: 400 }
+    );
+  }
+
+  const { data: appointment, error } = await supabaseServer
+    .from("appointments")
+    .select("*, service:services(name)")
+    .eq("id", appointmentId)
+    .single();
+
+  if (error || !appointment) {
+    return Response.json({ error: "Appointment not found" }, { status: 404 });
+  }
+
+  if (appointment.status !== "pending_otp") {
+    return Response.json(
+      { error: "Appointment is not pending verification" },
+      { status: 400 }
+    );
+  }
+
+  if (new Date(appointment.otp_expires_at) < new Date()) {
+    return Response.json({ error: "OTP has expired" }, { status: 400 });
+  }
+
+  if (appointment.otp_code !== otp) {
+    return Response.json({ error: "Invalid OTP" }, { status: 400 });
+  }
+
+  const { error: updateError } = await supabaseServer
+    .from("appointments")
+    .update({
+      status: "confirmed",
+      confirmed_at: new Date().toISOString(),
+      otp_code: null,
+      otp_expires_at: null,
+    })
+    .eq("id", appointmentId);
+
+  if (updateError) {
+    console.error("Confirm update error:", updateError);
+    return Response.json(
+      { error: "Failed to confirm appointment" },
+      { status: 500 }
+    );
+  }
+
+  const serviceName = appointment.service?.name || "Salon Appointment";
+  const appointmentDate = format(
+    parse(appointment.appointment_date, "yyyy-MM-dd", new Date()),
+    "EEEE, dd MMM yyyy"
+  );
+  const appointmentTime = appointment.appointment_time.slice(0, 5);
+
+  const details = {
+    appointmentId,
+    patientName: appointment.patient_name,
+    patientPhone: appointment.patient_phone,
+    serviceName,
+    appointmentDate,
+    appointmentTime,
+  };
+
+  try {
+    await Promise.all([
+      sendBookingConfirmation(appointment.patient_phone, details),
+      sendStylistNotification(details),
+    ]);
+  } catch (err) {
+    console.error("Confirmation send error:", err);
+  }
+
+  return Response.json({
+    success: true,
+    appointment: {
+      id: appointmentId,
+      serviceName,
+      date: appointmentDate,
+      time: appointmentTime,
+      patientName: appointment.patient_name,
+    },
+  });
+}
