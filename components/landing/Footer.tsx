@@ -10,26 +10,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 border border-primary/40 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m9.813 15.904 3.09-8.808m-3.09 8.808L3.312 9.488a1.5 1.5 0 0 1 .64-2.028l6.375-3.188a1.5 1.5 0 0 1 1.346 0l6.375 3.188a1.5 1.5 0 0 1 .64 2.028l-6.5 6.416a1.5 1.5 0 0 1-2.376 0Z"
-                  />
-                </svg>
-              </div>
-              <span className="text-xl font-display font-semibold tracking-wide">
-                ELITE <span className="text-primary">EDGE</span>
-              </span>
-            </div>
+            <span className="text-xl font-display font-semibold tracking-wide">
+              ELITE <span className="text-primary">EDGE</span>
+            </span>
             <p className="text-white/40 max-w-sm leading-relaxed text-sm">
               Premium beauty services with easy online booking. Where luxury
               meets artistry, and every visit is an experience.

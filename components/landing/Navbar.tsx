@@ -32,26 +32,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 border border-primary/40 rounded-full flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-primary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m9.813 15.904 3.09-8.808m-3.09 8.808L3.312 9.488a1.5 1.5 0 0 1 .64-2.028l6.375-3.188a1.5 1.5 0 0 1 1.346 0l6.375 3.188a1.5 1.5 0 0 1 .64 2.028l-6.5 6.416a1.5 1.5 0 0 1-2.376 0Z"
-                />
-              </svg>
-            </div>
-            <span className="text-xl font-display font-semibold tracking-wide">
-              <span className="text-foreground">ELITE</span>
-              <span className="text-primary ml-1">EDGE</span>
-            </span>
+          <Link href="/" className="text-xl font-display font-semibold tracking-wide">
+            <span className="text-foreground">ELITE</span>
+            <span className="text-primary ml-1">EDGE</span>
           </Link>
 
           {/* Desktop nav */}
