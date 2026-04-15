@@ -44,7 +44,7 @@ export default function DateStep({
             mode="single"
             selected={selected || undefined}
             required={false}
-            onSelect={(day) => onSelect(day || null)}
+            onSelect={(day) => { if (day) onSelect(day); }}
             disabled={isDisabled}
             fromDate={today}
             toDate={addDays(today, 60)}

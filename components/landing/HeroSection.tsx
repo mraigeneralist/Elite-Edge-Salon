@@ -29,7 +29,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 border border-primary/30 text-primary px-5 py-2 text-[11px] font-medium tracking-[0.2em] uppercase"
             >
               <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-              Now Accepting New Clients
+              Premium Salon Experience
             </motion.div>
 
             <motion.h1
